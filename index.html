@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Getdataproject : Coursera: Getting and Cleaning Data - Course Project">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Getdataproject</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/datascience3/GetDataProject">View on GitHub</a>
+
+          <h1 id="project_title">Getdataproject</h1>
+          <h2 id="project_tagline">Coursera: Getting and Cleaning Data - Course Project</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/datascience3/GetDataProject/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/datascience3/GetDataProject/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="getting-and-cleaning-data-course-project" class="anchor" href="#getting-and-cleaning-data-course-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting and Cleaning Data: Course Project</h1>
+
+<p>In (1), Anguita, Ghio, Oneto, Parra, and Reyes-Ortiz present a system for human activity recognition using accelerometer and gyroscope sensors in smartphones. The dataset is available at the UC Irvine machine learning repository website <a href="http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones">http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones</a>. In this course project, we provide scripts written in the R porgramming language to download, process, clean, and summarize portions of the data.</p>
+
+<h3>
+<a id="description-of-the-files-included" class="anchor" href="#description-of-the-files-included" aria-hidden="true"><span class="octicon octicon-link"></span></a>Description of the files included</h3>
+
+<ul>
+<li>README.md - this document.</li>
+<li>run_analysis.R - contains code written in the R programming language to
+               process and create a tidy data set from the smartphone data.</li>
+<li>codebook.md - a codebook describing the variables in the tidy data set.</li>
+</ul>
+
+<h3>
+<a id="instructions-loading-the-data-and-running-the-scripts" class="anchor" href="#instructions-loading-the-data-and-running-the-scripts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Instructions: Loading the data and running the scripts</h3>
+
+<p>To create a tidy data set, open an R session, set
+the current working directory (using <code>setwd()</code>) to the directory
+containing <code>run_analysis.R</code> and enter the following at the prompt:</p>
+
+<div class="highlight highlight-source-r"><pre>source(<span class="pl-s"><span class="pl-pds">'</span>run_analysis.R<span class="pl-pds">'</span></span>)
+<span class="pl-smi">df</span> <span class="pl-k">&lt;-</span> run_analysis() <span class="pl-c"># downloads the dataset and creates a large data frame, this could take 3-4 minutes</span>
+<span class="pl-smi">tidy_df</span> <span class="pl-k">&lt;-</span> tidy(<span class="pl-smi">df</span>) <span class="pl-c"># creates a tidy data set</span></pre></div>
+
+<h3>
+<a id="the-run_analysisr-file" class="anchor" href="#the-run_analysisr-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>The <code>run_analysis.R</code> file</h3>
+
+<p>The <code>run_analysis.R</code> file contains code for the functions <code>run_analysis()</code> and <code>tidy()</code>.</p>
+
+<p>The <code>run_analysis()</code> function requires no argument, whereas <code>tidy()</code> requires a data frame as its argument, and it MUST be the data frame returned by <code>run_analysis()</code>. Both functions return a data frame object.</p>
+
+<ul>
+<li>
+<p><strong>run_analysis()</strong> - Performs the following:</p>
+
+<ol>
+<li>Downloads the Human Activity Recognition dataset
+ from cloudfront.net</li>
+<li>Saves the dataset to "UCI HAR Dataset.zip" in the current
+ working directory.</li>
+<li>Unzips the file "UCI HAR Dataset.zip", creating a directory
+ "UCI HAR Dataset" in the current working directory.</li>
+<li>Merges the training and the test sets to create one data set.</li>
+<li>Extracts only the measurements on the mean and standard
+ deviation for each measurement.</li>
+<li>Uses descriptive activity names to name the activities
+ in the data set.</li>
+<li>Appropriately labels the data set with descriptive variable
+ names, removing non-alphanumeric characters from the labels.</li>
+</ol>
+</li>
+<li><p><strong>tidy()</strong> - Creates a tidy data set from the data frame produced by the run_analysis() function. Returns a data frame where the columns are averaged for each subject ID and activity.</p></li>
+</ul>
+
+<h3>
+<a id="summary-of-the-datasets-created-by-run_analysis-and-tidy" class="anchor" href="#summary-of-the-datasets-created-by-run_analysis-and-tidy" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary of the datasets created by <code>run_analysis()</code> and <code>tidy()</code>
+</h3>
+
+<p>The function <code>run_analysis()</code> creates a relatively large data frame having 10299 rows and 88 columns. The first 86 columns give measurements collected from the accelerometers and gyroscope sensors in the Samsung Galaxy S smartphone (refer to the <code>codebook.md</code> file for further descriptions of each variable).</p>
+
+<p>The last two columns are 'activity' and 'subject', which indicates the activity a specific subject was performing when the measurements were taken.</p>
+
+<p>There are 30 subjects labelled 1 through 30. The activities listed in the 'activity' column are given the descriptive activity names "STANDING", "SITTING", "LAYING", "WALKING", "WALKINGDOWNSTAIRS", and "WALKINGUPSTAIRS".</p>
+
+<p>On average, each (activity, subject) pair has approximately 57 observations. The data set created by the <code>tidy()</code> function summarizes everything by averaging the measurements for each (activity, subject) pair. Since there are 180 such pairs, the <code>tidy()</code> functions produces a smaller data frame having only 180 rows (and 88 columns).</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-c"># eight random rows, the first column and last two columns only.</span>
+<span class="pl-smi">tidy_df</span>[sort(sample(<span class="pl-c1">180</span>, <span class="pl-c1">8</span>)), c(<span class="pl-c1">1</span>, <span class="pl-c1">87</span>, <span class="pl-c1">88</span>)]</pre></div>
+
+<pre><code>##     TimeBodyAccelMeanX          Activity Subject
+## 14           0.2571976           SITTING       3
+## 26           0.2736941           SITTING       5
+## 56           0.2706121           SITTING      10
+## 81           0.2805456          STANDING      14
+## 119          0.2961444 WALKINGDOWNSTAIRS      20
+## 148          0.2789928           WALKING      25
+## 155          0.2792846 WALKINGDOWNSTAIRS      26
+## 160          0.2768495           WALKING      27
+</code></pre>
+
+<h3>
+<a id="references" class="anchor" href="#references" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h3>
+
+<p>(1) Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Getdataproject maintained by <a href="https://github.com/datascience3">datascience3</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
